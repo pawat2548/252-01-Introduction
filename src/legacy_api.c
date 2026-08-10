@@ -7,11 +7,6 @@
 int legacy_parse_year(const char *record) {
     const char *colon;
 
-    /* TODO(student): legacy parsing style:
-       - find ':'
-       - if missing, return 0
-       - parse with atoi(colon + 1)
-    */
     colon = strchr(record, ':');
     if (colon == NULL) {
         return 0;
@@ -23,13 +18,12 @@ int legacy_parse_year(const char *record) {
 void legacy_make_slug(const char *name, char *out) {
     size_t i;
 
-    /* TODO(student):
-       - convert letters to lowercase
-       - replace spaces with '_'
-       - copy other characters as-is
-    */
     for (i = 0; name[i] != '\0'; i++) {
-        out[i] = name[i];
+        if (name[i] == ' ') {
+            out[i] = '_';
+        } else {
+            out[i] = (char)tolower((unsigned char)name[i]);
+        }
     }
     out[i] = '\0';
 }
